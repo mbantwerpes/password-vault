@@ -1,5 +1,6 @@
 {
-  "passwords": [
+  "credentials": [
     { "service": "Google", "username": "Marcel", "password": "12345678" }
-  ]
+  ],
+  "info": "bla"
 }
