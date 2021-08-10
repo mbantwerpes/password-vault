@@ -7,3 +7,11 @@ export const readCredentials = async (): Promise<Credential[]> => {
   const credentials = db.credentials;
   return credentials;
 };
+
+export const findCredential = async (service: string): Promise<Credential> => {
+  const credentials = await readCredentials();
+  const filtered = credentials.filter(
+    (credential) => credential.service.toLowerCase() === service.toLowerCase()
+  );
+  return filtered[0];
+};
