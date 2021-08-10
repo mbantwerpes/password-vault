@@ -10,7 +10,8 @@ app.get('/api/credentials', async (_request, response) => {
 });
 
 app.get('/api/credentials/:service', async (request, response) => {
-  const credential = await findCredential(request.params.service);
+  const urlParameter = request.params.service;
+  const credential = await findCredential(urlParameter);
   response.send(credential);
 });
 
