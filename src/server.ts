@@ -37,7 +37,7 @@ app.post('/api/credentials', async (request, response) => {
   response.status(200).send(request.body);
 });
 
-app.delete('/api/credentials/:service', async (request, response) => {
+app.delete('/api/credentials/:service', async (request, _response) => {
   const urlParameter = request.params.service;
   deleteCredential(urlParameter);
 });
