@@ -1,8 +1,15 @@
-import express from 'express';
-import { readCredentials, findCredential } from './utils/credentials';
+import express, { response } from 'express';
+import {
+  readCredentials,
+  findCredential,
+  addCredential,
+  deleteCredential,
+} from './utils/credentials';
 
 const app = express();
 const port = 3000;
+
+app.use(express.json());
 
 app.get('/api/credentials', async (_request, response) => {
   try {
@@ -23,6 +30,16 @@ app.get('/api/credentials/:service', async (request, response) => {
     console.error(error);
     response.status(404).send(`Could not find service: ${urlParameter}`);
   }
+});
+
+app.post('/api/credentials', async (request, response) => {
+  addCredential(request.body);
+  response.status(200).send(request.body);
+});
+
+app.delete('/api/credentials/:service', async (request, response) => {
+  const urlParameter = request.params.service;
+  deleteCredential(urlParameter);
 });
 
 app.listen(port, () => {
