@@ -1,12 +1,13 @@
 import CryptoJS from 'crypto-js';
 import { Credential } from '../types';
 
-const masterKey = 'johndow';
-
-export const encryptCredential = (credential: Credential): Credential => {
+export const encryptCredential = (
+  credential: Credential,
+  masterPassword: string
+): Credential => {
   const encryptedPassword = CryptoJS.TripleDES.encrypt(
     credential.password,
-    masterKey
+    masterPassword
   ).toString();
 
   const encryptedCredential = {
@@ -17,10 +18,13 @@ export const encryptCredential = (credential: Credential): Credential => {
   return encryptedCredential;
 };
 
-export const decryptCredential = (credential: Credential): Credential => {
+export const decryptCredential = (
+  credential: Credential,
+  masterPassword: string
+): Credential => {
   const decryptedPassword = CryptoJS.TripleDES.decrypt(
     credential.password,
-    masterKey
+    masterPassword
   ).toString(CryptoJS.enc.Utf8);
 
   const decryptedCredential = {

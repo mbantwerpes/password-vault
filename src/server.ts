@@ -1,4 +1,7 @@
 import express from 'express';
+import dotenv from 'dotenv';
+dotenv.config();
+
 import {
   readCredentials,
   findCredential,
@@ -14,9 +17,14 @@ const port = 3000;
 app.use(express.json());
 app.use(isAuthorized);
 
-app.get('/api/credentials', async (_request, response) => {
+app.get('/api/credentials', async (request, response) => {
   try {
-    const credentials = await readCredentials();
+    const masterPassword = request.headers.authorization;
+    if (!masterPassword) {
+      response.status(401).send('Unauthorized');
+      return;
+    }
+    const credentials = await readCredentials(masterPassword);
     response.status(200).json(credentials);
   } catch (error) {
     console.error(error);
@@ -25,9 +33,14 @@ app.get('/api/credentials', async (_request, response) => {
 });
 
 app.get('/api/credentials/:service', async (request, response) => {
+  const masterPassword = request.headers.authorization;
+  if (!masterPassword) {
+    response.status(401).send('Unauthorized');
+    return;
+  }
   const urlParameter = request.params.service;
   try {
-    const credential = await findCredential(urlParameter);
+    const credential = await findCredential(urlParameter, masterPassword);
     response.status(200).json(credential);
   } catch (error) {
     console.error(error);
@@ -36,14 +49,24 @@ app.get('/api/credentials/:service', async (request, response) => {
 });
 
 app.post('/api/credentials', async (request, response) => {
+  const masterPassword = request.headers.authorization;
+  if (!masterPassword) {
+    response.status(401).send('Unauthorized');
+    return;
+  }
   const credential = request.body;
-  await addCredential(credential);
+  await addCredential(credential, masterPassword);
   response.status(200).send(request.body);
 });
 
 app.put('/api/credentials/:service', async (request, response) => {
+  const masterPassword = request.headers.authorization;
+  if (!masterPassword) {
+    response.status(401).send('Unauthorized');
+    return;
+  }
   const urlParameter = request.params.service;
-  await updateCredential(urlParameter, request.body);
+  await updateCredential(urlParameter, request.body, masterPassword);
   response.status(200).send(request.body);
 });
 
