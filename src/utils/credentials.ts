@@ -6,13 +6,17 @@ export const readCredentials = async (): Promise<Credential[]> => {
   try {
     const db: DB = await getDB();
     const credentials = db.credentials;
-    return credentials;
+    const decryptedCredentials = credentials.map((credential) => {
+      return (credential = decryptCredential(credential));
+    });
+    return decryptedCredentials;
   } catch (error) {
     throw new Error(`Error: ${error}`);
   }
 };
 
 export const findCredential = async (service: string): Promise<Credential> => {
+  // This already delivers the password decrypted, so no need to decrypt here again
   const credentials = await readCredentials();
   const credential = credentials.find(
     (credential) => credential.service.toLowerCase() === service.toLowerCase()
@@ -20,8 +24,7 @@ export const findCredential = async (service: string): Promise<Credential> => {
   if (!credential) {
     throw new Error(`No credential found for service: ${service}`);
   }
-  console.log(decryptCredential(credential));
-  return credential;
+  return decryptCredential(credential);
 };
 
 export const addCredential = async (credential: Credential): Promise<void> => {
