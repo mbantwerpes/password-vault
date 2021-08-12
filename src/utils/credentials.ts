@@ -43,8 +43,7 @@ export const updateCredential = async (
   const db: DB = await getDB();
   db.credentials = db.credentials.map((credential) => {
     if (credential.service.toLowerCase() === service.toLowerCase()) {
-      credential.password = newCredential.password;
-      credential.username = newCredential.username;
+      credential = newCredential;
     }
     return credential;
   });

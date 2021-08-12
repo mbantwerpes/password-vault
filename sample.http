@@ -19,9 +19,9 @@ PUT http://localhost:3000/api/credentials/test
 Content-Type: application/json
 
 {
-    "service": "test",
-    "username": "Hans",
-    "password": "465"
+    "service": "Wurstmann",
+    "username": "Wurst",
+    "password": "Mann"
 }
 
 ### Delete single credential
