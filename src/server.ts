@@ -1,9 +1,10 @@
-import express, { response } from 'express';
+import express from 'express';
 import {
   readCredentials,
   findCredential,
   addCredential,
   deleteCredential,
+  updateCredential,
 } from './utils/credentials';
 
 const app = express();
@@ -37,9 +38,16 @@ app.post('/api/credentials', async (request, response) => {
   response.status(200).send(request.body);
 });
 
-app.delete('/api/credentials/:service', async (request, _response) => {
+app.put('/api/credentials/:service', async (request, response) => {
+  const urlParameter = request.params.service;
+  await updateCredential(urlParameter, request.body);
+  response.status(200).send();
+});
+
+app.delete('/api/credentials/:service', async (request, response) => {
   const urlParameter = request.params.service;
   deleteCredential(urlParameter);
+  response.status(200).send();
 });
 
 app.listen(port, () => {

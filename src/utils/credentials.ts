@@ -1,5 +1,4 @@
-import { readFile } from 'fs/promises';
-import fs from 'fs';
+import { readFile, writeFile } from 'fs/promises';
 import { DB, Credential } from '../types';
 
 export const readCredentials = async (): Promise<Credential[]> => {
@@ -23,20 +22,33 @@ export const findCredential = async (service: string): Promise<Credential> => {
   return credential;
 };
 
-export const addCredential = async (
-  credential: Credential
-): Promise<boolean> => {
+export const addCredential = async (credential: Credential): Promise<void> => {
   const db: DB = await getDB();
   db.credentials = [...db.credentials, credential];
   return overwriteDB(db);
 };
 
-export const deleteCredential = async (service: string): Promise<boolean> => {
+export const deleteCredential = async (service: string): Promise<void> => {
   const db: DB = await getDB();
   db.credentials = db.credentials.filter(
     (credential) => credential.service.toLowerCase() !== service.toLowerCase()
   );
   return overwriteDB(db);
+};
+
+export const updateCredential = async (
+  service: string,
+  newCredential: Credential
+): Promise<void> => {
+  const db: DB = await getDB();
+  db.credentials = db.credentials.map((credential) => {
+    if (credential.service.toLowerCase() === service.toLowerCase()) {
+      credential.password = newCredential.password;
+      credential.username = newCredential.username;
+    }
+    return credential;
+  });
+  return await overwriteDB(db);
 };
 
 const getDB = async (): Promise<DB> => {
@@ -45,14 +57,7 @@ const getDB = async (): Promise<DB> => {
   return db;
 };
 
-const overwriteDB = (db: DB): boolean => {
+const overwriteDB = async (db: DB): Promise<void> => {
   const dbString = JSON.stringify(db, null, 2);
-  fs.writeFile('src/db.json', dbString, (err: any) => {
-    if (err) {
-      console.error(err);
-      return false;
-    }
-    return true;
-  });
-  return true;
+  await writeFile('src/db.json', dbString);
 };

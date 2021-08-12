@@ -2,17 +2,27 @@
 GET http://localhost:3000/api/credentials
 
 ### Get single credential
-GET http://localhost:3000/api/credentials/icq
+GET http://localhost:3000/api/credentials/blub
 
 ### Add single credential
 POST http://localhost:3000/api/credentials
 Content-Type: application/json
 
 {
-    "service": "blub",
+    "service": "test",
     "username": "Marcel",
     "password": "12345678"
 }
 
+### Update single credential
+PUT http://localhost:3000/api/credentials/test
+Content-Type: application/json
+
+{
+    "service": "test",
+    "username": "Hans",
+    "password": "465"
+}
+
 ### Delete single credential
-DELETE http://localhost:3000/api/credentials/blub
+DELETE http://localhost:3000/api/credentials/test

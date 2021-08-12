@@ -1,9 +1,9 @@
 {
   "credentials": [
     {
-      "service": "Google",
-      "username": "Marcel",
-      "password": "12345678"
+      "service": "blub",
+      "username": "Hans",
+      "password": "465"
     },
     {
       "service": "MySpace",
