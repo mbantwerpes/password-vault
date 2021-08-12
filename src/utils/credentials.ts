@@ -1,5 +1,6 @@
 import { readFile, writeFile } from 'fs/promises';
 import { DB, Credential } from '../types';
+import tripledes from 'crypto-js/tripledes';
 
 export const readCredentials = async (): Promise<Credential[]> => {
   try {
@@ -24,6 +25,7 @@ export const findCredential = async (service: string): Promise<Credential> => {
 
 export const addCredential = async (credential: Credential): Promise<void> => {
   const db: DB = await getDB();
+  credential.password = encryptPassword(credential.password);
   db.credentials = [...db.credentials, credential];
   return overwriteDB(db);
 };
@@ -59,4 +61,11 @@ const getDB = async (): Promise<DB> => {
 const overwriteDB = async (db: DB): Promise<void> => {
   const dbString = JSON.stringify(db, null, 2);
   await writeFile('src/db.json', dbString);
+};
+
+const encryptPassword = (password: string): string => {
+  const masterKey = 'johndoe';
+  const encryptedPassword = tripledes.encrypt(password, masterKey).toString();
+
+  return encryptedPassword;
 };
