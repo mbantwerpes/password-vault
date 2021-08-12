@@ -6,6 +6,7 @@ import {
   deleteCredential,
   updateCredential,
 } from './utils/credentials';
+import tripledes from 'crypto-js/tripledes';
 
 const app = express();
 const port = 3000;
@@ -34,7 +35,9 @@ app.get('/api/credentials/:service', async (request, response) => {
 });
 
 app.post('/api/credentials', async (request, response) => {
-  addCredential(request.body);
+  const credential = request.body;
+  credential.password = encryptPassword(credential.password);
+  addCredential(credential);
   response.status(200).send(request.body);
 });
 
@@ -53,3 +56,10 @@ app.delete('/api/credentials/:service', async (request, response) => {
 app.listen(port, () => {
   console.log(`Servier listening at http://localhost:${port}`);
 });
+
+const encryptPassword = (password: string): string => {
+  const masterKey = 'johndoe';
+  const encryptedPassword = tripledes.encrypt(password, masterKey).toString();
+
+  return encryptedPassword;
+};

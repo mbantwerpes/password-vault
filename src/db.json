@@ -9,6 +9,11 @@
       "service": "MySpace",
       "username": "Marcel",
       "password": "12345678"
+    },
+    {
+      "service": "test",
+      "username": "Marcel",
+      "password": "U2FsdGVkX183Z91BfoQA0Vg0cP1OZDMez7W+EnShtZg="
     }
   ]
 }
