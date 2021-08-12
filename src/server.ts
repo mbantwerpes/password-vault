@@ -41,7 +41,7 @@ app.post('/api/credentials', async (request, response) => {
 app.put('/api/credentials/:service', async (request, response) => {
   const urlParameter = request.params.service;
   await updateCredential(urlParameter, request.body);
-  response.status(200).send();
+  response.status(200).send(request.body);
 });
 
 app.delete('/api/credentials/:service', async (request, response) => {
