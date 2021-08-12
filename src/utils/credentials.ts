@@ -24,7 +24,7 @@ export const findCredential = async (service: string): Promise<Credential> => {
   if (!credential) {
     throw new Error(`No credential found for service: ${service}`);
   }
-  return decryptCredential(credential);
+  return credential;
 };
 
 export const addCredential = async (credential: Credential): Promise<void> => {
