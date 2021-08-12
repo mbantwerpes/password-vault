@@ -9,7 +9,7 @@ POST http://localhost:3000/api/credentials
 Content-Type: application/json
 
 {
-    "service": "test",
+    "service": "bsdgadsg",
     "username": "Marcel",
     "password": "12345678"
 }
