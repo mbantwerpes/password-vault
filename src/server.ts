@@ -19,11 +19,7 @@ app.use(isAuthorized);
 
 app.get('/api/credentials', async (request, response) => {
   try {
-    const masterPassword = request.headers.authorization;
-    if (!masterPassword) {
-      response.status(401).send('Unauthorized');
-      return;
-    }
+    const masterPassword = response.locals.masterPassword;
     const credentials = await readCredentials(masterPassword);
     response.status(200).json(credentials);
   } catch (error) {
@@ -33,11 +29,7 @@ app.get('/api/credentials', async (request, response) => {
 });
 
 app.get('/api/credentials/:service', async (request, response) => {
-  const masterPassword = request.headers.authorization;
-  if (!masterPassword) {
-    response.status(401).send('Unauthorized');
-    return;
-  }
+  const masterPassword = response.locals.masterPassword;
   const urlParameter = request.params.service;
   try {
     const credential = await findCredential(urlParameter, masterPassword);
@@ -49,22 +41,14 @@ app.get('/api/credentials/:service', async (request, response) => {
 });
 
 app.post('/api/credentials', async (request, response) => {
-  const masterPassword = request.headers.authorization;
-  if (!masterPassword) {
-    response.status(401).send('Unauthorized');
-    return;
-  }
+  const masterPassword = response.locals.masterPassword;
   const credential = request.body;
   await addCredential(credential, masterPassword);
   response.status(200).send(request.body);
 });
 
 app.put('/api/credentials/:service', async (request, response) => {
-  const masterPassword = request.headers.authorization;
-  if (!masterPassword) {
-    response.status(401).send('Unauthorized');
-    return;
-  }
+  const masterPassword = response.locals.masterPassword;
   const urlParameter = request.params.service;
   await updateCredential(urlParameter, request.body, masterPassword);
   response.status(200).send(request.body);
