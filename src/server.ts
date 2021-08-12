@@ -51,5 +51,5 @@ app.delete('/api/credentials/:service', async (request, response) => {
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Servier listening at http://localhost:${port}`);
 });
