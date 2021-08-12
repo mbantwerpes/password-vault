@@ -43,9 +43,10 @@ export const updateCredential = async (
   newCredential: Credential
 ): Promise<void> => {
   const db: DB = await getDB();
+  const encrptedCredential = encryptCredential(newCredential);
   db.credentials = db.credentials.map((credential) => {
     if (credential.service.toLowerCase() === service.toLowerCase()) {
-      credential = newCredential;
+      credential = encrptedCredential;
     }
     return credential;
   });
