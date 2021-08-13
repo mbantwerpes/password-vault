@@ -3,7 +3,7 @@ GET http://localhost:3000/api/credentials
 Authorization: 123
 
 ### Get single credential
-GET http://localhost:3000/api/credentials/bsdgadsg
+GET http://localhost:3000/api/credentials/Wurstmann
 Authorization: 123
 
 ### Add single credential

@@ -8,7 +8,7 @@ export const isAuthorized = async (
 ): Promise<void> => {
   const masterPassword = req.headers.authorization;
   if (!masterPassword) {
-    res.status(401).send('Unauthorized');
+    res.status(401).send('No authorization provided');
     return;
   }
   if (await validateMasterPassword(masterPassword)) {
