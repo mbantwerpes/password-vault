@@ -17,7 +17,7 @@ const port = 3000;
 app.use(express.json());
 app.use(isAuthorized);
 
-app.get('/api/credentials', async (request, response) => {
+app.get('/api/credentials', async (_request, response) => {
   try {
     const masterPassword = response.locals.masterPassword;
     const credentials = await readCredentials(masterPassword);
