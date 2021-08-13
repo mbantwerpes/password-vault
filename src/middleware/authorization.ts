@@ -1,16 +1,20 @@
 import { validateMasterPassword } from '../utils/validation';
+import { Request, Response, NextFunction } from 'express';
 
-// TODO remove any and add real types
 export const isAuthorized = async (
-  req: any,
-  res: any,
-  next: any
+  req: Request,
+  res: Response,
+  next: NextFunction
 ): Promise<void> => {
   const masterPassword = req.headers.authorization;
+  if (!masterPassword) {
+    res.status(401).send('Unauthorized');
+    return;
+  }
   if (await validateMasterPassword(masterPassword)) {
     res.locals.masterPassword = masterPassword;
     next();
   } else {
-    res.send(401, 'Unauthorized');
+    res.status(401).send('Unauthorized');
   }
 };
