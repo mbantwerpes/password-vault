@@ -1,5 +1,6 @@
 import { validateMasterPassword } from '../utils/validation';
 
+// TODO remove any and add real types
 export const isAuthorized = async (
   req: any,
   res: any,
