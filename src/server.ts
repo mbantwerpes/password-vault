@@ -10,6 +10,11 @@ import {
   updateCredential,
 } from './utils/credentials';
 import { isAuthorized } from './middleware/authorization';
+import { connectDatabase } from './utils/database';
+
+if (!process.env.MONGO_DB_URL) {
+  throw new Error('No MONGO_DB_URL env variable');
+}
 
 const app = express();
 const port = 3000;
@@ -60,6 +65,8 @@ app.delete('/api/credentials/:service', async (request, response) => {
   response.status(200).send();
 });
 
-app.listen(port, () => {
-  console.log(`Servier listening at http://localhost:${port}`);
+connectDatabase(process.env.MONGO_DB_URL).then(() => {
+  app.listen(port, () => {
+    console.log(`Server listening at http://localhost:${port}`);
+  });
 });
