@@ -3,12 +3,17 @@
     {
       "service": "Wurstmann",
       "username": "Wurst",
-      "password": "Mann"
+      "password": "U2FsdGVkX1+9RclLfRx8Xnuul01X0Biv"
     },
     {
-      "service": "MySpace",
-      "username": "Marcel",
-      "password": "12345678"
+      "service": "Wurstmann",
+      "username": "Wurst",
+      "password": "U2FsdGVkX1+9RclLfRx8Xnuul01X0Biv"
+    },
+    {
+      "service": "Wurstmann",
+      "username": "Wurst",
+      "password": "U2FsdGVkX19rVEmzhYrcC1kUgGiXXYZl"
     }
   ]
 }

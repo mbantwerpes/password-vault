@@ -1,21 +1,25 @@
 ### Get all credentials
 GET http://localhost:3000/api/credentials
+Authorization: 123
 
 ### Get single credential
-GET http://localhost:3000/api/credentials/blub
+GET http://localhost:3000/api/credentials/bsdgadsg
+Authorization: 123
 
 ### Add single credential
 POST http://localhost:3000/api/credentials
+Authorization: 123
 Content-Type: application/json
 
 {
-    "service": "test",
+    "service": "bsdgadsg",
     "username": "Marcel",
-    "password": "12345678"
+    "password": "123"
 }
 
 ### Update single credential
-PUT http://localhost:3000/api/credentials/test
+PUT http://localhost:3000/api/credentials/bsdgadsg
+Authorization: 123
 Content-Type: application/json
 
 {
@@ -25,4 +29,5 @@ Content-Type: application/json
 }
 
 ### Delete single credential
-DELETE http://localhost:3000/api/credentials/test
+DELETE http://localhost:3000/api/credentials/bsdgadsg
+Authorization: 123
