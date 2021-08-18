@@ -29,5 +29,5 @@ Content-Type: application/json
 }
 
 ### Delete single credential
-DELETE http://localhost:3000/api/credentials/Facebook
+DELETE http://localhost:3000/api/credentials/Wurstmann
 Authorization: 123
