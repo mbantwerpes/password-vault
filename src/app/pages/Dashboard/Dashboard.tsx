@@ -7,6 +7,10 @@ const Dashboard = (): JSX.Element => {
       <h1>Dashboard</h1>
       <p>This is my password vault</p>
       <input type="text" placeholder="Search..." />
+      <div>
+        <p>Reddit</p>
+        <p>max@mustermann.de</p>
+      </div>
     </div>
   );
 };
