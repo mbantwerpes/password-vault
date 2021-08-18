@@ -4,7 +4,7 @@ dotenv.config();
 
 import {
   readCredentials,
-  findCredential,
+  getCredential,
   addCredential,
   deleteCredential,
   updateCredential,
@@ -37,7 +37,7 @@ app.get('/api/credentials/:service', async (request, response) => {
   const masterPassword = response.locals.masterPassword;
   const urlParameter = request.params.service;
   try {
-    const credential = await findCredential(urlParameter, masterPassword);
+    const credential = await getCredential(urlParameter, masterPassword);
     response.status(200).json(credential);
   } catch (error) {
     console.error(error);

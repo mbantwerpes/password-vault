@@ -1,58 +1,60 @@
-import { Credential } from '../types';
-import { encryptCredential, decryptCredential } from './crypto';
+import type { ObjectId } from 'mongodb';
+import type { Credential } from '../types';
+import { decryptCredential, encryptCredential } from './crypto';
 import { getCredentialCollection } from './database';
 
-export const readCredentials = async (
-  masterPassword: string
-): Promise<Credential[]> => {
-  try {
-    const collection = getCredentialCollection();
-    const credentials = await collection.find().toArray();
+export async function readCredentials(key: string): Promise<Credential[]> {
+  const credentialCollection = getCredentialCollection();
+  const encryptedCredentials = await credentialCollection.find().toArray();
+  const credentials = encryptedCredentials.map((credential) =>
+    decryptCredential(credential, key)
+  );
+  return credentials;
+}
 
-    const decryptedCredentials = credentials.map((credential) => {
-      return (credential = decryptCredential(credential, masterPassword));
-    });
-
-    return decryptedCredentials;
-  } catch (error) {
-    throw new Error(`Error: ${error}`);
-  }
-};
-
-export const findCredential = async (
+export async function getCredential(
   service: string,
-  masterPassword: string
-): Promise<Credential> => {
-  const collection = getCredentialCollection();
-  const credential = await collection.findOne({ service });
+  key: string
+): Promise<Credential> {
+  const credentialCollection = getCredentialCollection();
+  const encryptedCredential = await credentialCollection.findOne({ service });
 
-  if (!credential) {
-    throw new Error(`No credential found for service: ${service}`);
+  if (!encryptedCredential) {
+    throw new Error(`Unable to find service ${service}`);
   }
 
-  return decryptCredential(credential, masterPassword);
-};
+  const credential = decryptCredential(encryptedCredential, key);
+  return credential;
+}
 
-export const addCredential = async (
+export async function addCredential(
   credential: Credential,
-  masterPassword: string
-): Promise<void> => {
-  const collection = getCredentialCollection();
-  const newCredential = encryptCredential(credential, masterPassword);
-  collection.insertOne(newCredential);
-};
+  key: string
+): Promise<ObjectId> {
+  const credentialCollection = getCredentialCollection();
 
-export const deleteCredential = async (service: string): Promise<void> => {
-  const collection = getCredentialCollection();
-  collection.findOneAndDelete({ service });
-};
+  const encryptedCredential = encryptCredential(credential, key);
 
-export const updateCredential = async (
+  const result = await credentialCollection.insertOne(encryptedCredential);
+  return result.insertedId;
+}
+
+export async function deleteCredential(service: string): Promise<void> {
+  const credentialCollection = getCredentialCollection();
+  await credentialCollection.deleteOne({ service });
+}
+
+export async function updateCredential(
   service: string,
-  newCredential: Credential,
-  masterPassword: string
-): Promise<void> => {
-  const encrptedCredential = encryptCredential(newCredential, masterPassword);
-  const collection = getCredentialCollection();
-  collection.findOneAndReplace({ service }, encrptedCredential);
-};
+  credential: Credential,
+  key: string
+): Promise<void> {
+  const credentialCollection = getCredentialCollection();
+
+  const encryptedCredential = encryptCredential(credential, key);
+
+  await credentialCollection.updateOne(
+    { service },
+    { $set: encryptedCredential }
+  );
+}
