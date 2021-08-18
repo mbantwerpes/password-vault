@@ -12,13 +12,13 @@ Authorization: 123
 Content-Type: application/json
 
 {
-    "service": "bsdgadsg",
+    "service": "Twitter",
     "username": "Marcel",
-    "password": "123"
+    "password": "123456789"
 }
 
 ### Update single credential
-PUT http://localhost:3000/api/credentials/bsdgadsg
+PUT http://localhost:3000/api/credentials/Twitter
 Authorization: 123
 Content-Type: application/json
 
@@ -29,5 +29,5 @@ Content-Type: application/json
 }
 
 ### Delete single credential
-DELETE http://localhost:3000/api/credentials/bsdgadsg
+DELETE http://localhost:3000/api/credentials/Wurstmann
 Authorization: 123

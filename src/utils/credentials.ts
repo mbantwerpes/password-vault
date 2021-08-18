@@ -1,78 +1,60 @@
-import { readFile, writeFile } from 'fs/promises';
-import { DB, Credential } from '../types';
-import { encryptCredential, decryptCredential } from './crypto';
+import type { ObjectId } from 'mongodb';
+import type { Credential } from '../types';
+import { decryptCredential, encryptCredential } from './crypto';
+import { getCredentialCollection } from './database';
 
-export const readCredentials = async (
-  masterPassword: string
-): Promise<Credential[]> => {
-  try {
-    const db: DB = await getDB();
-    const credentials = db.credentials;
-    const decryptedCredentials = credentials.map((credential) => {
-      return (credential = decryptCredential(credential, masterPassword));
-    });
-    return decryptedCredentials;
-  } catch (error) {
-    throw new Error(`Error: ${error}`);
-  }
-};
-
-export const findCredential = async (
-  service: string,
-  masterPassword: string
-): Promise<Credential> => {
-  // This already delivers the password decrypted, so no need to decrypt here again
-  const credentials = await readCredentials(masterPassword);
-  const credential = credentials.find(
-    (credential) => credential.service.toLowerCase() === service.toLowerCase()
+export async function readCredentials(key: string): Promise<Credential[]> {
+  const credentialCollection = getCredentialCollection();
+  const encryptedCredentials = await credentialCollection.find().toArray();
+  const credentials = encryptedCredentials.map((credential) =>
+    decryptCredential(credential, key)
   );
-  if (!credential) {
-    throw new Error(`No credential found for service: ${service}`);
+  return credentials;
+}
+
+export async function getCredential(
+  service: string,
+  key: string
+): Promise<Credential> {
+  const credentialCollection = getCredentialCollection();
+  const encryptedCredential = await credentialCollection.findOne({ service });
+
+  if (!encryptedCredential) {
+    throw new Error(`Unable to find service ${service}`);
   }
+
+  const credential = decryptCredential(encryptedCredential, key);
   return credential;
-};
+}
 
-export const addCredential = async (
+export async function addCredential(
   credential: Credential,
-  masterPassword: string
-): Promise<void> => {
-  const db: DB = await getDB();
-  const newCredential = encryptCredential(credential, masterPassword);
-  db.credentials = [...db.credentials, newCredential];
-  return overwriteDB(db);
-};
+  key: string
+): Promise<ObjectId> {
+  const credentialCollection = getCredentialCollection();
 
-export const deleteCredential = async (service: string): Promise<void> => {
-  const db: DB = await getDB();
-  db.credentials = db.credentials.filter(
-    (credential) => credential.service.toLowerCase() !== service.toLowerCase()
-  );
-  return overwriteDB(db);
-};
+  const encryptedCredential = encryptCredential(credential, key);
 
-export const updateCredential = async (
+  const result = await credentialCollection.insertOne(encryptedCredential);
+  return result.insertedId;
+}
+
+export async function deleteCredential(service: string): Promise<void> {
+  const credentialCollection = getCredentialCollection();
+  await credentialCollection.deleteOne({ service });
+}
+
+export async function updateCredential(
   service: string,
-  newCredential: Credential,
-  masterPassword: string
-): Promise<void> => {
-  const db: DB = await getDB();
-  const encrptedCredential = encryptCredential(newCredential, masterPassword);
-  db.credentials = db.credentials.map((credential) => {
-    if (credential.service.toLowerCase() === service.toLowerCase()) {
-      credential = encrptedCredential;
-    }
-    return credential;
-  });
-  return await overwriteDB(db);
-};
+  credential: Credential,
+  key: string
+): Promise<void> {
+  const credentialCollection = getCredentialCollection();
 
-const getDB = async (): Promise<DB> => {
-  const response = await readFile('src/db.json', 'utf-8');
-  const db: DB = JSON.parse(response);
-  return db;
-};
+  const encryptedCredential = encryptCredential(credential, key);
 
-const overwriteDB = async (db: DB): Promise<void> => {
-  const dbString = JSON.stringify(db, null, 2);
-  await writeFile('src/db.json', dbString);
-};
+  await credentialCollection.updateOne(
+    { service },
+    { $set: encryptedCredential }
+  );
+}

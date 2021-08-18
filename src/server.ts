@@ -4,12 +4,17 @@ dotenv.config();
 
 import {
   readCredentials,
-  findCredential,
+  getCredential,
   addCredential,
   deleteCredential,
   updateCredential,
 } from './utils/credentials';
 import { isAuthorized } from './middleware/authorization';
+import { connectDatabase } from './utils/database';
+
+if (!process.env.MONGO_DB_URL) {
+  throw new Error('No MONGO_DB_URL env variable');
+}
 
 const app = express();
 const port = 3000;
@@ -32,7 +37,7 @@ app.get('/api/credentials/:service', async (request, response) => {
   const masterPassword = response.locals.masterPassword;
   const urlParameter = request.params.service;
   try {
-    const credential = await findCredential(urlParameter, masterPassword);
+    const credential = await getCredential(urlParameter, masterPassword);
     response.status(200).json(credential);
   } catch (error) {
     console.error(error);
@@ -60,6 +65,8 @@ app.delete('/api/credentials/:service', async (request, response) => {
   response.status(200).send();
 });
 
-app.listen(port, () => {
-  console.log(`Servier listening at http://localhost:${port}`);
+connectDatabase(process.env.MONGO_DB_URL).then(() => {
+  app.listen(port, () => {
+    console.log(`Server listening at http://localhost:${port}`);
+  });
 });
