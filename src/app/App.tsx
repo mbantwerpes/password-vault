@@ -8,6 +8,9 @@ function App(): JSX.Element {
   return (
     <Router>
       <Switch>
+        <Route path="/services">
+          <div>Services</div>
+        </Route>
         <Route path="/">
           <Dashboard />
         </Route>
