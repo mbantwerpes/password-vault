@@ -1,5 +1,5 @@
 import React from 'react';
-// import styles from './App.module.css';
+import styles from './App.module.css';
 import Dashboard from './pages/Dashboard/Dashboard';
 
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 function App(): JSX.Element {
   return (
     <Router>
-      <nav>
+      <nav className={styles.navContainer}>
         <Link to="/">Dashboard</Link>
         <Link to="/services">Services</Link>
       </nav>
