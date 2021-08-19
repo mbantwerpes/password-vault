@@ -5,8 +5,19 @@
 .navContainer {
   width: 95%;
   height: 4rem;
-  display: flex;
-  justify-content: flex-end;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 5rem 1fr;
   align-items: center;
   gap: 2rem;
+}
+
+.navLinks {
+  justify-self: flex-end;
+  display: flex;
+  gap: 1rem;
+}
+
+.logo {
+  justify-self: center;
 }
