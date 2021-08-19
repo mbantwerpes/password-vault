@@ -17,7 +17,7 @@ if (!process.env.MONGO_DB_URL) {
 }
 
 const app = express();
-const port = 3001;
+const { PORT = 30001 } = process.env;
 
 app.use(express.json());
 app.use(isAuthorized);
@@ -66,7 +66,7 @@ app.delete('/api/credentials/:service', async (request, response) => {
 });
 
 connectDatabase(process.env.MONGO_DB_URL).then(() => {
-  app.listen(port, () => {
-    console.log(`Server listening at http://localhost:${port}`);
+  app.listen(PORT, () => {
+    console.log(`Server listening at http://localhost:${PORT}`);
   });
 });
