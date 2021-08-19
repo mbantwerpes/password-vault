@@ -22,6 +22,7 @@ function App(): JSX.Element {
         </Route>
       </Switch>
       <div id="modal-root" />
+      <div id="notification-root" />
     </Router>
   );
 }

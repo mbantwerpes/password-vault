@@ -33,17 +33,14 @@ const Dashboard = (): JSX.Element => {
           </div>
         );
       })}
-
-      {/* 
-      Example for the modal, so to open it just call show from the useModal hook
+      {/* Example for the modal, so to open it just call show from the useModal hook
       <div onClick={show}>
         <p>Reddit</p>
         <p>max@mustermann.de</p>
       </div>
       <RenderModal>
         <p>Hello this is your amazing modal</p>
-      </RenderModal> 
-      */}
+      </RenderModal> */}
     </div>
   );
 };
