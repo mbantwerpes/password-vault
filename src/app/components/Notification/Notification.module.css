@@ -5,7 +5,14 @@
   margin-right: 10vw;
   margin-left: 10vw;
   width: 80vw;
-  background-color: greenyellow;
   border-radius: 0.5rem;
   padding: 1rem;
+}
+
+.typePrimary {
+  background-color: blue;
+}
+
+.typeWarning {
+  background-color: red;
 }
