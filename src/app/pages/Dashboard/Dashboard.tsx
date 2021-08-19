@@ -27,7 +27,11 @@ const Dashboard = (): JSX.Element => {
       <p>This is my password vault</p>
       <input type="text" placeholder="Search..." />
       {credentials?.map((credential) => {
-        return <div key={credential._id}>{credential.service}</div>;
+        return (
+          <div key={credential._id}>
+            {credential.service} {credential.password}
+          </div>
+        );
       })}
 
       {/* 
