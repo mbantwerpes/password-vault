@@ -6,6 +6,7 @@ import { useNotification } from '../../hooks/useNotification';
 
 const Dashboard = (): JSX.Element => {
   const [credentials, setCredentials] = useState<Credential[]>([]);
+  const [masterPassword, setMasterPassword] = useState<string>('');
   const { show, RenderNotification } = useNotification();
 
   // const { show, RenderModal } = useModal();
@@ -14,20 +15,25 @@ const Dashboard = (): JSX.Element => {
     const fetchCredentials = async () => {
       const response = await fetch('/api/credentials', {
         headers: {
-          Authorization: '123',
+          Authorization: masterPassword,
         },
       });
       const data = await response.json();
       setCredentials(data);
     };
     fetchCredentials();
-  }, []);
+  }, [masterPassword]);
 
   return (
     <div className={styles.container}>
       <h1>Dashboard</h1>
       <p>This is my password vault</p>
-      <input type="text" placeholder="Search..." />
+      <input
+        type="password"
+        placeholder="Masterpassword"
+        value={masterPassword}
+        onChange={(event) => setMasterPassword(event.target.value)}
+      />
       {credentials?.map((credential) => {
         return (
           <div key={credential._id}>
