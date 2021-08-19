@@ -1,8 +1,25 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+
 import styles from './Notification.module.css';
 
-const Notification = (): JSX.Element => {
-  return <div className={styles.container}>Test Notification</div>;
+type Props = {
+  children: React.ReactChild;
+  closeNotification: () => void;
 };
+
+const Notification = React.memo(({ children, closeNotification }: Props) => {
+  const domEl = document.querySelector('#notification-root');
+
+  if (!domEl) return null;
+
+  return ReactDOM.createPortal(
+    <div className={styles.container}>
+      <button onClick={closeNotification}>Close</button>
+      {children}
+    </div>,
+    domEl
+  );
+});
 
 export default Notification;
