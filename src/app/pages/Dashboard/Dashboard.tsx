@@ -22,6 +22,7 @@ const Dashboard = (): JSX.Element => {
       setCredentials(data);
     };
     fetchCredentials();
+    if (!masterPassword) setCredentials([]);
   }, [masterPassword]);
 
   return (
@@ -34,13 +35,15 @@ const Dashboard = (): JSX.Element => {
         value={masterPassword}
         onChange={(event) => setMasterPassword(event.target.value)}
       />
-      {credentials.map((credential) => {
-        return (
-          <div key={credential._id}>
-            {credential.service} {credential.password}
-          </div>
-        );
-      })}
+      {credentials.length !== 0 &&
+        credentials.map((credential) => {
+          return (
+            <div key={credential._id}>
+              <p>Service: {credential.service}</p>
+              <p>Password: {credential.password}</p>
+            </div>
+          );
+        })}
       <button onClick={show}>Show notification</button>
       <RenderNotification>
         <p>Hello this is your amazing notification</p>
