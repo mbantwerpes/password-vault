@@ -5,9 +5,9 @@ import logo from '../../assets/logo.svg';
 
 const Navbar = (): JSX.Element => {
   return (
-    <nav className={styles.navContainer}>
+    <nav className={styles.container}>
       <img src={logo} alt="" width="30" className={styles.logo} />
-      <div className={styles.navLinks}>
+      <div className={styles.links}>
         <Link to="/">Dashboard</Link>
         <Link to="/services">Services</Link>
         <Link to="/passwords/testservice">Passwords</Link>

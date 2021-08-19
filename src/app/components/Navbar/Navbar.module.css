@@ -1,4 +1,4 @@
-.navContainer {
+.container {
   width: 95%;
   height: 4rem;
   display: grid;
@@ -8,7 +8,7 @@
   gap: 2rem;
 }
 
-.navLinks {
+.links {
   justify-self: flex-end;
   display: flex;
   gap: 1rem;
