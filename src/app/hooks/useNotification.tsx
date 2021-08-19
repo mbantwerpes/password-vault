@@ -8,10 +8,13 @@ export const useNotification = () => {
   const show = () => setIsVisible(true);
   const hide = () => setIsVisible(false);
 
-  const RenderNotification = (
-    { children }: { children: React.ReactChild },
-    type: string
-  ) => (
+  const RenderNotification = ({
+    children,
+    type,
+  }: {
+    children: React.ReactChild;
+    type: string;
+  }) => (
     <>
       {isVisible && (
         <Notification closeNotification={hide} type={type}>
