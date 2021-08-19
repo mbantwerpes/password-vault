@@ -2,13 +2,15 @@
   position: fixed;
   text-align: center;
   bottom: 2%;
+  width: 80vw;
   margin-right: 10vw;
   margin-left: 10vw;
-  width: 80vw;
   border-radius: 0.5rem;
   padding: 1rem;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr, 10px;
 }
-
 .typePrimary {
   background-color: blue;
 }

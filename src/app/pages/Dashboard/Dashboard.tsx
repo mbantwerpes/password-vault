@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Dashboard.module.css';
-import type { Credential } from '../../../types';
 // import { useModal } from '../../hooks/useModal';
 import { useNotification } from '../../hooks/useNotification';
+import type { Credential } from '../../../types';
 
 const Dashboard = (): JSX.Element => {
   const [credentials, setCredentials] = useState<Credential[]>([]);
@@ -46,7 +46,7 @@ const Dashboard = (): JSX.Element => {
         })}
       <button onClick={show}>Show notification</button>
       <RenderNotification type="warning">
-        This is my amazing modal
+        This is my amazing notification
       </RenderNotification>
       {/* Example for the modal, so to open it just call show from the useModal hook
       <div onClick={show}>
