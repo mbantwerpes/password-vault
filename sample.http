@@ -1,13 +1,13 @@
 ### Get all credentials
-GET http://localhost:3000/api/credentials
+GET http://localhost:3001/api/credentials
 Authorization: 123
 
 ### Get single credential
-GET http://localhost:3000/api/credentials/Wurstmann
+GET http://localhost:3001/api/credentials/Wurstmann
 Authorization: 123
 
 ### Add single credential
-POST http://localhost:3000/api/credentials
+POST http://localhost:3001/api/credentials
 Authorization: 123
 Content-Type: application/json
 
@@ -18,7 +18,7 @@ Content-Type: application/json
 }
 
 ### Update single credential
-PUT http://localhost:3000/api/credentials/Twitter
+PUT http://localhost:3001/api/credentials/Twitter
 Authorization: 123
 Content-Type: application/json
 
@@ -29,5 +29,5 @@ Content-Type: application/json
 }
 
 ### Delete single credential
-DELETE http://localhost:3000/api/credentials/Wurstmann
+DELETE http://localhost:3001/api/credentials/Wurstmann
 Authorization: 123
