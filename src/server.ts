@@ -17,7 +17,7 @@ if (!process.env.MONGO_DB_URL) {
 }
 
 const app = express();
-const { PORT = 30001 } = process.env;
+const { PORT = 3001 } = process.env;
 
 app.use(express.json());
 app.use(isAuthorized);
