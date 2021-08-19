@@ -7,6 +7,19 @@ const Dashboard = (): JSX.Element => {
 
   // const { show, RenderModal } = useModal();
 
+  useEffect(() => {
+    const fetchCredentials = async () => {
+      const response = await fetch('/api/credentials', {
+        headers: {
+          Authorization: '123',
+        },
+      });
+      const data = await response.json();
+      setCredentials(data);
+    };
+    fetchCredentials();
+  }, []);
+
   return (
     <div className={styles.container}>
       <h1>Dashboard</h1>
