@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Dashboard.module.css';
+import type { Credential } from '../../../types';
 // import { useModal } from '../../hooks/useModal';
 
 const Dashboard = (): JSX.Element => {
-  const [credentials, setCredentials] = useState([]);
+  const [credentials, setCredentials] = useState<Credential[]>([]);
 
   // const { show, RenderModal } = useModal();
 
@@ -25,7 +26,9 @@ const Dashboard = (): JSX.Element => {
       <h1>Dashboard</h1>
       <p>This is my password vault</p>
       <input type="text" placeholder="Search..." />
-      {credentials?.forEach((credential) => console.log(credential))}
+      {credentials?.map((credential) => {
+        return <div key={credential._id}>{credential.service}</div>;
+      })}
       {/* 
       Another way of writing the line above
       {credentials && credentials.forEach((credential) => console.log(credential))} 
