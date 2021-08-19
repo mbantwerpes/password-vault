@@ -29,10 +29,6 @@ const Dashboard = (): JSX.Element => {
       {credentials?.map((credential) => {
         return <div key={credential._id}>{credential.service}</div>;
       })}
-      {/* 
-      Another way of writing the line above
-      {credentials && credentials.forEach((credential) => console.log(credential))} 
-      */}
 
       {/* 
       Example for the modal, so to open it just call show from the useModal hook
