@@ -34,14 +34,14 @@ const Dashboard = (): JSX.Element => {
         value={masterPassword}
         onChange={(event) => setMasterPassword(event.target.value)}
       />
-      {credentials?.map((credential) => {
+      {credentials.map((credential) => {
         return (
           <div key={credential._id}>
             {credential.service} {credential.password}
           </div>
         );
       })}
-      <button onClick={show}>Test</button>
+      <button onClick={show}>Show notification</button>
       <RenderNotification>
         <p>Hello this is your amazing notification</p>
       </RenderNotification>
