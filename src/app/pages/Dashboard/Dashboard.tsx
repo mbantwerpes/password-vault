@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import styles from './Dashboard.module.css';
 import type { Credential } from '../../../types';
 // import { useModal } from '../../hooks/useModal';
+import { useNotification } from '../../hooks/useNotification';
 
 const Dashboard = (): JSX.Element => {
   const [credentials, setCredentials] = useState<Credential[]>([]);
+  const { show, RenderNotification } = useNotification();
 
   // const { show, RenderModal } = useModal();
 
@@ -33,6 +35,10 @@ const Dashboard = (): JSX.Element => {
           </div>
         );
       })}
+      <button onClick={show}>Test</button>
+      <RenderNotification>
+        <p>Hello this is your amazing notification</p>
+      </RenderNotification>
       {/* Example for the modal, so to open it just call show from the useModal hook
       <div onClick={show}>
         <p>Reddit</p>
