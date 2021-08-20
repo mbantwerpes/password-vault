@@ -15,11 +15,11 @@ const ConfirmDeleteModal = ({
     <div>
       <p>Do you really want to delete the service?</p>
       <div className={styles.buttonContainer}>
-        <Button type="button" styleType="error" size="sm" onClick={onDelete}>
-          Delete
-        </Button>
         <Button type="button" styleType="primary" size="sm" onClick={onClose}>
           Cancel
+        </Button>
+        <Button type="button" styleType="error" size="sm" onClick={onDelete}>
+          Delete
         </Button>
       </div>
     </div>
