@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import styles from './Modal.module.css';
 
 type Props = {
@@ -17,7 +16,10 @@ const Modal = React.memo(({ children, closeModal }: Props) => {
   // use this component inside our React tree
   return ReactDOM.createPortal(
     <div className={styles.container}>
-      <button onClick={closeModal}>Close</button>
+      <div className={styles.titleContainer}>
+        <h3>Modaltitle</h3>
+        <button onClick={closeModal}>X</button>
+      </div>
       {children}
     </div>,
     domEl
