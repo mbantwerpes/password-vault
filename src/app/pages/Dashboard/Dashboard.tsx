@@ -5,6 +5,7 @@ import type { Credential } from '../../../types';
 import Card from '../../components/Card/Card';
 import ServiceCardContent from '../../components/ServiceCardContent/ServiceCardContent';
 import FloatingActionButton from '../../components/FloatingActionButton/FloatingActionButton';
+import Input from '../../components/Input/Input';
 
 const Dashboard = (): JSX.Element => {
   const [credentials, setCredentials] = useState<Credential[]>([]);
@@ -48,11 +49,11 @@ const Dashboard = (): JSX.Element => {
     <div className={styles.container}>
       <h1>Dashboard</h1>
       <p>This is my password vault</p>
-      <input
+      <Input
         type="password"
         placeholder="Masterpassword"
         value={masterPassword}
-        onChange={(event) => setMasterPassword(event.target.value)}
+        onChange={setMasterPassword}
       />
       <div className={styles.servicesContainer}>
         {credentials.length !== 0 &&
