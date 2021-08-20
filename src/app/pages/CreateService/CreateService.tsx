@@ -9,9 +9,25 @@ const CreateService = (): JSX.Element => {
   const [passwordValue, setPasswordValue] = useState('');
   const [masterPasswordValue, setMasterPasswordValue] = useState('');
 
-  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log('juhu');
+
+    const postData = {
+      service: serviceValue,
+      username: usernameValue,
+      password: passwordValue,
+    };
+
+    const response = await fetch('/api/credentials', {
+      method: 'POST',
+      headers: {
+        Authorization: masterPasswordValue,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(postData),
+    });
+    console.log(await response.json());
   };
 
   return (
