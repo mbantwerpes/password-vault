@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '../Button/Button';
+import styles from './ConfirmDeleteModal.module.css';
 
 type ConfirmDeleteModalProps = {
   onDelete: () => void;
@@ -13,12 +14,14 @@ const ConfirmDeleteModal = ({
   return (
     <div>
       <p>Do you really want to delete the service?</p>
-      <Button type="button" styleType="error" size="sm" onClick={onDelete}>
-        Delete
-      </Button>
-      <Button type="button" styleType="primary" size="sm" onClick={onClose}>
-        Cancel
-      </Button>
+      <div className={styles.buttonContainer}>
+        <Button type="button" styleType="error" size="sm" onClick={onDelete}>
+          Delete
+        </Button>
+        <Button type="button" styleType="primary" size="sm" onClick={onClose}>
+          Cancel
+        </Button>
+      </div>
     </div>
   );
 };
