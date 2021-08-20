@@ -58,7 +58,9 @@ const CreateService = (): JSX.Element => {
           value={masterPasswordValue}
           onChange={setMasterPasswordValue}
         />
-        <Button text="Ship it" type="submit" styleType="primary" size="md" />
+        <Button type="submit" styleType="primary" size="md">
+          Test
+        </Button>
       </form>
     </div>
   );

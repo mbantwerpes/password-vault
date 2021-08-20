@@ -2,13 +2,18 @@ import React from 'react';
 import styles from './Button.module.css';
 
 type ButtonProps = {
-  text: string;
+  children: React.ReactElement | string;
   type: 'button' | 'submit' | 'reset' | undefined;
   styleType: 'primary' | 'error' | 'warning' | 'success';
   size: 'sm' | 'md' | 'lg';
 };
 
-const Button = ({ text, type, styleType, size }: ButtonProps): JSX.Element => {
+const Button = ({
+  children,
+  type,
+  styleType,
+  size,
+}: ButtonProps): JSX.Element => {
   const getStyleTypeClass = (): string => {
     switch (styleType) {
       case 'primary':
@@ -35,7 +40,7 @@ const Button = ({ text, type, styleType, size }: ButtonProps): JSX.Element => {
           : styles.large
       }`}
     >
-      {text}
+      {children}
     </button>
   );
 };
