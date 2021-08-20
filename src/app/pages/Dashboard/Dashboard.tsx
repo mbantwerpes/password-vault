@@ -50,7 +50,7 @@ const Dashboard = (): JSX.Element => {
           })}
       </div>
       <button onClick={show}>Show notification</button>
-      <RenderNotification type="primary">
+      <RenderNotification type="warning">
         This is my amazing notification
       </RenderNotification>
       <FloatingActionButton />
