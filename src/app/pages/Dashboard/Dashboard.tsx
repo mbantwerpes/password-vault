@@ -25,8 +25,15 @@ const Dashboard = (): JSX.Element => {
     if (!masterPassword) setCredentials([]);
   }, [masterPassword]);
 
-  const handleDeleteService = (id: string) => {
+  const handleDeleteService = async (id: string) => {
     console.log(id);
+    const response = await fetch(`/api/credentials/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: masterPassword,
+      },
+    });
+    console.log(await response.json());
   };
 
   return (

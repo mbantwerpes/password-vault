@@ -1,4 +1,4 @@
-import type { ObjectId } from 'mongodb';
+import { ObjectId } from 'mongodb';
 import type { Credential } from '../types';
 import { decryptCredential, encryptCredential } from './crypto';
 import { getCredentialCollection } from './database';
@@ -40,8 +40,11 @@ export async function addCredential(
 }
 
 export async function deleteCredential(id: string): Promise<void> {
+  console.log(id);
   const credentialCollection = getCredentialCollection();
-  await credentialCollection.deleteOne({ id });
+  await credentialCollection.deleteOne({
+    _id: new ObjectId(id),
+  });
 }
 
 export async function updateCredential(
