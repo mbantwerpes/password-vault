@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Dashboard.module.css';
-// import { useModal } from '../../hooks/useModal';
 import { useNotification } from '../../hooks/useNotification';
 import type { Credential } from '../../../types';
 import Card from '../../components/Card/Card';
+import ServiceCardContent from '../../components/ServiceCardContent/ServiceCardContent';
+import FloatingActionButton from '../../components/FloatingActionButton/FloatingActionButton';
 
 const Dashboard = (): JSX.Element => {
   const [credentials, setCredentials] = useState<Credential[]>([]);
   const [masterPassword, setMasterPassword] = useState<string>('');
   const { show, RenderNotification } = useNotification();
-
-  // const { show, RenderModal } = useModal();
 
   useEffect(() => {
     const fetchCredentials = async () => {
@@ -36,28 +35,25 @@ const Dashboard = (): JSX.Element => {
         value={masterPassword}
         onChange={(event) => setMasterPassword(event.target.value)}
       />
-      {credentials.length !== 0 &&
-        credentials.map((credential) => {
-          return (
-            <div key={credential._id}>
-              <p>Service: {credential.service}</p>
-              <p>Password: {credential.password}</p>
-            </div>
-          );
-        })}
-      <Card>Test</Card>
+      <div className={styles.servicesContainer}>
+        {credentials.length !== 0 &&
+          credentials.map((credential) => {
+            return (
+              <Card key={credential._id}>
+                <ServiceCardContent
+                  service={credential.service}
+                  username={credential.username}
+                  password={credential.password}
+                />
+              </Card>
+            );
+          })}
+      </div>
       <button onClick={show}>Show notification</button>
       <RenderNotification type="primary">
         This is my amazing notification
       </RenderNotification>
-      {/* Example for the modal, so to open it just call show from the useModal hook
-      <div onClick={show}>
-        <p>Reddit</p>
-        <p>max@mustermann.de</p>
-      </div>
-      <RenderModal>
-        <p>Hello this is your amazing modal</p>
-      </RenderModal> */}
+      <FloatingActionButton />
     </div>
   );
 };

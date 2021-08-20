@@ -1,0 +1,11 @@
+p {
+  margin: 0.3rem;
+}
+
+.container {
+  display: grid;
+}
+
+.description {
+  font-weight: 700;
+}
