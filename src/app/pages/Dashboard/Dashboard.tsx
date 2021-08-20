@@ -39,6 +39,8 @@ const Dashboard = (): JSX.Element => {
         (credential) => credential._id !== id
       );
       setCredentials(newCredentials);
+
+      show();
     }
   };
 
@@ -68,9 +70,8 @@ const Dashboard = (): JSX.Element => {
             );
           })}
       </div>
-      <button onClick={show}>Show notification</button>
-      <RenderNotification type="warning">
-        This is my amazing notification
+      <RenderNotification type="success">
+        Service successfully deleted
       </RenderNotification>
       <FloatingActionButton />
     </div>
