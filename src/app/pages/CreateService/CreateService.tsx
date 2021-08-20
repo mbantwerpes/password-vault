@@ -7,10 +7,10 @@ const CreateService = (): JSX.Element => {
     <div className={styles.container}>
       <h1>Hier bin ich</h1>
       <form action="">
-        <Input type="text" />
-        <Input type="text" />
-        <Input type="password" />
-        <Input type="password" />
+        <Input type="text" placeholder="Service" />
+        <Input type="text" placeholder="Username" />
+        <Input type="password" placeholder="Password" />
+        <Input type="password" placeholder="MasterPassword" />
       </form>
     </div>
   );
