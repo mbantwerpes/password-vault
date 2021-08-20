@@ -39,9 +39,9 @@ export async function addCredential(
   return result.insertedId;
 }
 
-export async function deleteCredential(service: string): Promise<void> {
+export async function deleteCredential(id: string): Promise<void> {
   const credentialCollection = getCredentialCollection();
-  await credentialCollection.deleteOne({ service });
+  await credentialCollection.deleteOne({ id });
 }
 
 export async function updateCredential(

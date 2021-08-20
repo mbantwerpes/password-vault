@@ -59,8 +59,8 @@ app.put('/api/credentials/:service', async (request, response) => {
   response.status(200).send(request.body);
 });
 
-app.delete('/api/credentials/:service', async (request, response) => {
-  const urlParameter = request.params.service;
+app.delete('/api/credentials/:serviceId', async (request, response) => {
+  const urlParameter = request.params.serviceId;
   deleteCredential(urlParameter);
   response.status(200).send();
 });
