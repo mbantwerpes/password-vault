@@ -20,10 +20,10 @@ p {
 }
 
 .deleteButton {
-  color: #f44336;
+  color: var(--clr-error);
   cursor: pointer;
 }
 
 .editButton {
-  color: #2196f3;
+  color: var(--clr-primary);
 }
