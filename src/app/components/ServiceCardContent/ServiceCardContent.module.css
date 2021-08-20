@@ -4,8 +4,26 @@ p {
 
 .container {
   display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr 2rem;
+  gap: 3rem;
 }
 
 .description {
   font-weight: 700;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.deleteButton {
+  color: #f44336;
+  cursor: pointer;
+}
+
+.editButton {
+  color: #2196f3;
 }
