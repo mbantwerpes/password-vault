@@ -1,0 +1,43 @@
+.container {
+  position: fixed;
+  bottom: 5%;
+  left: 50%;
+  min-width: 19rem;
+  transform: translateX(-50%);
+  text-align: center;
+  border-radius: 0.25rem;
+  padding: 0.45rem 1rem;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 2rem 1fr 2rem;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 500;
+  color: #fff;
+  box-shadow: 0 3px 5px -1px rgb(0 0 0 / 20%), 0 6px 10px 0 rgb(0 0 0 / 14%),
+    0 1px 18px 0 rgb(0 0 0 / 12%);
+}
+
+.closeButton {
+  height: 1.3rem;
+  border-style: none;
+  background: none;
+  cursor: pointer;
+  color: #fff;
+}
+
+.typePrimary {
+  background-color: #2196f3;
+}
+
+.typeError {
+  background-color: #f44336;
+}
+
+.typeWarning {
+  background-color: #ff9800;
+}
+
+.typeSuccess {
+  background-color: #4caf50;
+}
