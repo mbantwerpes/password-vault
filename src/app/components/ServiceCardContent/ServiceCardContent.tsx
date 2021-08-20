@@ -5,8 +5,7 @@ type ServiceCardContentProps = {
   service: string;
   username: string;
   password: string;
-  onDelete: (id: string) => void;
-  id: string;
+  onDelete: () => void;
 };
 
 const ServiceCardContent = ({
@@ -14,7 +13,6 @@ const ServiceCardContent = ({
   username,
   password,
   onDelete,
-  id,
 }: ServiceCardContentProps): JSX.Element => {
   return (
     <div className={styles.container}>
@@ -30,7 +28,7 @@ const ServiceCardContent = ({
         <span className={styles.description}>Password: </span>
         <span>{password}</span>
       </p>
-      <button onClick={() => onDelete(id)}>Delete</button>
+      <button onClick={onDelete}>Delete</button>
     </div>
   );
 };

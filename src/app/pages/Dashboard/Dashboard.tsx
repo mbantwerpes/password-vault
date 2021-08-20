@@ -64,7 +64,6 @@ const Dashboard = (): JSX.Element => {
                   username={credential.username}
                   password={credential.password}
                   onDelete={() => handleDeleteService(credential._id)}
-                  id={credential._id}
                 />
               </Card>
             );
