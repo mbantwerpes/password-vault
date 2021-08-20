@@ -33,7 +33,13 @@ const Dashboard = (): JSX.Element => {
         Authorization: masterPassword,
       },
     });
-    console.log(await response.json());
+    const status = await response.status;
+    if (status === 200) {
+      const newCredentials = credentials.filter(
+        (credential) => credential._id !== id
+      );
+      setCredentials(newCredentials);
+    }
   };
 
   return (
