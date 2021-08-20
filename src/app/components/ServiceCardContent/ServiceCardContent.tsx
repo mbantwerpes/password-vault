@@ -36,12 +36,8 @@ const ServiceCardContent = ({
           className={styles.deleteButton}
           size={24}
           onClick={onDelete}
-        >
-          Delete
-        </MdDeleteForever>
-        <MdModeEdit className={styles.editButton} size={24} onClick={onDelete}>
-          Delete
-        </MdModeEdit>
+        />
+        <MdModeEdit className={styles.editButton} size={24} />
       </div>
     </div>
   );
