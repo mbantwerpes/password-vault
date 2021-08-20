@@ -21,8 +21,10 @@ const Notification = React.memo(
           type === 'primary' ? styles.typePrimary : styles.typeWarning
         }`}
       >
-        <p>{children}</p>
-        <button onClick={closeNotification}>X</button>
+        <p className={styles.content}>{children}</p>
+        <button onClick={closeNotification} className={styles.closeButton}>
+          X
+        </button>
       </div>,
       domEl
     );
