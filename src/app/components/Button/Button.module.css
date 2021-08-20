@@ -1,3 +1,24 @@
-button {
-  border-style: none;
+.button {
+  color: white;
+}
+.typePrimary {
+  background-color: blue;
+}
+.typeError {
+  background-color: red;
+}
+.typeWarning {
+  background-color: yellow;
+}
+.typeSuccess {
+  background-color: green;
+}
+.small {
+  padding: 1rem;
+}
+.medium {
+  padding: 2rem;
+}
+.large {
+  padding: 3rem;
 }
