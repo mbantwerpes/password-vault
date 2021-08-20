@@ -17,7 +17,11 @@ const ServiceCardContent = ({
   password,
   onDelete,
 }: ServiceCardContentProps): JSX.Element => {
-  const { show: showDeleteModal, RenderModal: RenderDeleteModal } = useModal();
+  const {
+    show: showDeleteModal,
+    hide,
+    RenderModal: RenderDeleteModal,
+  } = useModal();
 
   return (
     <div className={styles.container}>
@@ -48,7 +52,7 @@ const ServiceCardContent = ({
         />
       </div>
       <RenderDeleteModal title="Delete">
-        <ConfirmDeleteModal onDelete={onDelete} />
+        <ConfirmDeleteModal onDelete={onDelete} onClose={hide} />
       </RenderDeleteModal>
     </div>
   );
