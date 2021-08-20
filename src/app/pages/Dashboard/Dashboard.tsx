@@ -45,6 +45,7 @@ const Dashboard = (): JSX.Element => {
             </div>
           );
         })}
+      <Card>Test</Card>
       <button onClick={show}>Show notification</button>
       <RenderNotification type="primary">
         This is my amazing notification
