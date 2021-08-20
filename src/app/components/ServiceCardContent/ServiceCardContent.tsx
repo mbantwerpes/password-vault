@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from './ServiceCardContent.module.css';
 import { MdDeleteForever, MdModeEdit } from 'react-icons/md';
+import { useModal } from '../../hooks/useModal';
+import ConfirmDeleteModal from '../ConfirmDeleteModal/ConfirmDeleteModal';
 
 type ServiceCardContentProps = {
   service: string;
@@ -15,6 +17,8 @@ const ServiceCardContent = ({
   password,
   onDelete,
 }: ServiceCardContentProps): JSX.Element => {
+  const { show: showDeleteModal, RenderModal: RenderDeleteModal } = useModal();
+
   return (
     <div className={styles.container}>
       <div>
@@ -35,10 +39,17 @@ const ServiceCardContent = ({
         <MdDeleteForever
           className={styles.deleteButton}
           size={24}
-          onClick={onDelete}
+          onClick={showDeleteModal}
         />
-        <MdModeEdit className={styles.editButton} size={24} />
+        <MdModeEdit
+          className={styles.editButton}
+          size={24}
+          onClick={showDeleteModal}
+        />
       </div>
+      <RenderDeleteModal>
+        <ConfirmDeleteModal onDelete={onDelete} />
+      </RenderDeleteModal>
     </div>
   );
 };
