@@ -2,16 +2,16 @@
   color: white;
 }
 .typePrimary {
-  background-color: blue;
+  background-color: var(--clr-primary);
 }
 .typeError {
-  background-color: red;
+  background-color: var(--clr-error);
 }
 .typeWarning {
-  background-color: yellow;
+  background-color: var(--clr-warning);
 }
 .typeSuccess {
-  background-color: green;
+  background-color: var(--clr-success);
 }
 .small {
   padding: 1rem;

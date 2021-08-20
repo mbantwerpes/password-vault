@@ -69,6 +69,7 @@ const Dashboard = (): JSX.Element => {
             );
           })}
       </div>
+      <button onClick={show}>asdfsdafdsa</button>
       <RenderNotification type="success">
         Service successfully deleted
       </RenderNotification>

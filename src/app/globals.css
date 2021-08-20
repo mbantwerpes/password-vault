@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
+:root {
+  --clr-primary: #2196f3;
+  --clr-error: #f44336;
+  --clr-warning: #ff9800;
+  --clr-success: #4caf50;
+}
+
 *,
 *::after,
 *::before {
