@@ -45,7 +45,7 @@ const Dashboard = (): JSX.Element => {
           );
         })}
       <button onClick={show}>Show notification</button>
-      <RenderNotification type="warning">
+      <RenderNotification type="primary">
         This is my amazing notification
       </RenderNotification>
       {/* Example for the modal, so to open it just call show from the useModal hook

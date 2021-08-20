@@ -9,7 +9,7 @@
   padding: 0.45rem 1rem;
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: 1fr 30px;
+  grid-template-columns: 2rem 1fr 2rem;
   align-items: center;
   gap: 1rem;
   font-weight: 500;
