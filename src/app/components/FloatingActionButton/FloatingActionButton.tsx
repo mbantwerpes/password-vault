@@ -5,7 +5,7 @@ import { MdAdd } from 'react-icons/md';
 
 const FloatingActionButton = (): JSX.Element => {
   return (
-    <Link to="/" className={styles.container}>
+    <Link to="/add" className={styles.container}>
       <MdAdd size={32} />
     </Link>
   );

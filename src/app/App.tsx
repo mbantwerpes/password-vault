@@ -3,14 +3,17 @@ import React from 'react';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Password from './pages/Password/Password';
 import Navbar from './components/Navbar/Navbar';
-
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import CreateService from './pages/CreateService/CreateService';
 
 function App(): JSX.Element {
   return (
     <Router>
       <Navbar />
       <Switch>
+        <Route path="/add">
+          <CreateService />
+        </Route>
         <Route path="/services">
           <div>Services</div>
         </Route>
