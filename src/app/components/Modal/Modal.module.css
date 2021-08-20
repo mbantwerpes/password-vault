@@ -26,4 +26,6 @@
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: 1fr 2rem;
+  border-bottom: 1px solid rgb(204, 204, 204);
+  margin-bottom: 1.2rem;
 }

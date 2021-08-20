@@ -5,9 +5,10 @@ import styles from './Modal.module.css';
 type Props = {
   children: React.ReactChild;
   closeModal: () => void;
+  title: string;
 };
 
-const Modal = React.memo(({ children, closeModal }: Props) => {
+const Modal = React.memo(({ children, closeModal, title }: Props) => {
   const domEl = document.querySelector('#modal-root');
 
   if (!domEl) return null;
@@ -17,7 +18,7 @@ const Modal = React.memo(({ children, closeModal }: Props) => {
   return ReactDOM.createPortal(
     <div className={styles.container}>
       <div className={styles.titleContainer}>
-        <h3>Modaltitle</h3>
+        <h3>{title}</h3>
         <button onClick={closeModal}>X</button>
       </div>
       {children}

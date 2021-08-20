@@ -9,7 +9,7 @@ const ConfirmDeleteModal = ({
 }: ConfirmDeleteModalProps): JSX.Element => {
   return (
     <div>
-      <p>Möchtest du den Service wirklich löschen?</p>
+      <p>Do you really want to delete the service?</p>
       <button onClick={onDelete}>Delete</button>
       <button>Cancel</button>
     </div>

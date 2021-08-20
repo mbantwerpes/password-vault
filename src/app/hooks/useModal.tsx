@@ -14,8 +14,20 @@ export const useModal = () => {
   const show = () => setIsVisible(true);
   const hide = () => setIsVisible(false);
 
-  const RenderModal = ({ children }: { children: React.ReactChild }) => (
-    <>{isVisible && <Modal closeModal={hide}>{children}</Modal>}</>
+  const RenderModal = ({
+    children,
+    title,
+  }: {
+    children: React.ReactChild;
+    title: string;
+  }) => (
+    <>
+      {isVisible && (
+        <Modal closeModal={hide} title={title}>
+          {children}
+        </Modal>
+      )}
+    </>
   );
 
   return {

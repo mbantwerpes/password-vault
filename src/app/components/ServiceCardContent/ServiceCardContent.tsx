@@ -47,7 +47,7 @@ const ServiceCardContent = ({
           onClick={showDeleteModal}
         />
       </div>
-      <RenderDeleteModal>
+      <RenderDeleteModal title="Delete">
         <ConfirmDeleteModal onDelete={onDelete} />
       </RenderDeleteModal>
     </div>
