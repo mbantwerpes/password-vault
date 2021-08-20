@@ -1,7 +1,8 @@
 .container {
   position: fixed;
-  bottom: 10%;
+  bottom: 5%;
   left: 50%;
+  min-width: 19rem;
   transform: translateX(-50%);
   text-align: center;
   border-radius: 0.25rem;
