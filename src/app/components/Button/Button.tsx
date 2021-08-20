@@ -6,6 +6,7 @@ type ButtonProps = {
   type: 'button' | 'submit' | 'reset' | undefined;
   styleType: 'primary' | 'error' | 'warning' | 'success';
   size: 'sm' | 'md' | 'lg';
+  onClick?: () => void;
 };
 
 const Button = ({
@@ -13,6 +14,7 @@ const Button = ({
   type,
   styleType,
   size,
+  onClick,
 }: ButtonProps): JSX.Element => {
   const getStyleTypeClass = (): string => {
     switch (styleType) {
@@ -31,6 +33,7 @@ const Button = ({
 
   return (
     <button
+      onClick={onClick}
       type={type}
       className={`${styles.button} ${getStyleTypeClass()} ${
         size === 'sm'
