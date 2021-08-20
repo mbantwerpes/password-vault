@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './Input.module.css';
 
 type InputProps = {
   type: string;
@@ -15,6 +16,7 @@ const Input = ({
 }: InputProps): JSX.Element => {
   return (
     <input
+      className={styles.input}
       type={type}
       placeholder={placeholder}
       value={value}
