@@ -2,10 +2,14 @@
   position: fixed;
   bottom: 1rem;
   right: 1rem;
-  background-color: #4c6ef5;
+  background-color: #1976d2;
   border-radius: 50%;
   width: 56px;
   height: 56px;
   color: white;
   border-style: none;
+  box-shadow: 0 3px 5px -1px rgb(0 0 0 / 20%), 0 6px 10px 0 rgb(0 0 0 / 14%),
+    0 1px 18px 0 rgb(0 0 0 / 12%);
+  display: grid;
+  place-items: center;
 }
