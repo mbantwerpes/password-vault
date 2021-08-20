@@ -3,6 +3,7 @@ import styles from './Dashboard.module.css';
 // import { useModal } from '../../hooks/useModal';
 import { useNotification } from '../../hooks/useNotification';
 import type { Credential } from '../../../types';
+import Card from '../../components/Card/Card';
 
 const Dashboard = (): JSX.Element => {
   const [credentials, setCredentials] = useState<Credential[]>([]);
