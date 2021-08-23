@@ -35,7 +35,7 @@ const Dashboard = (): JSX.Element => {
         Authorization: masterPassword,
       },
     });
-    const status = await response.status;
+    const status = response.status;
     if (status === 200) {
       const newCredentials = credentials.filter(
         (credential) => credential._id !== id
