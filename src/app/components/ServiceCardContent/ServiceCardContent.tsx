@@ -3,6 +3,7 @@ import styles from './ServiceCardContent.module.css';
 import { MdDeleteForever, MdModeEdit } from 'react-icons/md';
 import { useModal } from '../../hooks/useModal';
 import ConfirmDeleteModal from '../ConfirmDeleteModal/ConfirmDeleteModal';
+import EditServiceModal from '../EditServiceModal/EditServiceModal';
 
 type ServiceCardContentProps = {
   service: string;
@@ -19,8 +20,14 @@ const ServiceCardContent = ({
 }: ServiceCardContentProps): JSX.Element => {
   const {
     show: showDeleteModal,
-    hide,
+    hide: hideDeleteModal,
     RenderModal: RenderDeleteModal,
+  } = useModal();
+
+  const {
+    show: showEditModal,
+    hide: hideEditModal,
+    RenderModal: RenderEditModal,
   } = useModal();
 
   return (
@@ -48,12 +55,15 @@ const ServiceCardContent = ({
         <MdModeEdit
           className={styles.editButton}
           size={24}
-          onClick={showDeleteModal}
+          onClick={showEditModal}
         />
       </div>
       <RenderDeleteModal title="Delete">
-        <ConfirmDeleteModal onDelete={onDelete} onClose={hide} />
+        <ConfirmDeleteModal onDelete={onDelete} onClose={hideDeleteModal} />
       </RenderDeleteModal>
+      <RenderEditModal title="Edit">
+        <EditServiceModal onClose={hideEditModal} />
+      </RenderEditModal>
     </div>
   );
 };
