@@ -27,17 +27,17 @@
 }
 
 .typePrimary {
-  background-color: #2196f3;
+  background-color: var(--clr-primary);
 }
 
 .typeError {
-  background-color: #f44336;
+  background-color: var(--clr-error);
 }
 
 .typeWarning {
-  background-color: #ff9800;
+  background-color: var(--clr-warning);
 }
 
 .typeSuccess {
-  background-color: #4caf50;
+  background-color: var(--clr-success);
 }

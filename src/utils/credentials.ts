@@ -1,4 +1,4 @@
-import type { ObjectId } from 'mongodb';
+import { ObjectId } from 'mongodb';
 import type { Credential } from '../types';
 import { decryptCredential, encryptCredential } from './crypto';
 import { getCredentialCollection } from './database';
@@ -39,22 +39,25 @@ export async function addCredential(
   return result.insertedId;
 }
 
-export async function deleteCredential(service: string): Promise<void> {
+export async function deleteCredential(serviceId: string): Promise<void> {
   const credentialCollection = getCredentialCollection();
-  await credentialCollection.deleteOne({ service });
+  await credentialCollection.deleteOne({
+    _id: new ObjectId(serviceId),
+  });
 }
 
 export async function updateCredential(
-  service: string,
+  serviceId: string,
   credential: Credential,
   key: string
 ): Promise<void> {
+  console.log(serviceId);
   const credentialCollection = getCredentialCollection();
 
   const encryptedCredential = encryptCredential(credential, key);
 
   await credentialCollection.updateOne(
-    { service },
+    { _id: new ObjectId(serviceId) },
     { $set: encryptedCredential }
   );
 }

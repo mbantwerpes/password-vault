@@ -1,61 +1,89 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Dashboard.module.css';
-// import { useModal } from '../../hooks/useModal';
 import { useNotification } from '../../hooks/useNotification';
 import type { Credential } from '../../../types';
+import Card from '../../components/Card/Card';
+import ServiceCardContent from '../../components/ServiceCardContent/ServiceCardContent';
+import FloatingActionButton from '../../components/FloatingActionButton/FloatingActionButton';
+import Input from '../../components/Input/Input';
 
 const Dashboard = (): JSX.Element => {
   const [credentials, setCredentials] = useState<Credential[]>([]);
   const [masterPassword, setMasterPassword] = useState<string>('');
   const { show, RenderNotification } = useNotification();
 
-  // const { show, RenderModal } = useModal();
+  const fetchCredentials = async () => {
+    const response = await fetch('/api/credentials', {
+      headers: {
+        Authorization: masterPassword,
+      },
+    });
+    const data = await response.json();
+    setCredentials(data);
+  };
 
   useEffect(() => {
-    const fetchCredentials = async () => {
-      const response = await fetch('/api/credentials', {
-        headers: {
-          Authorization: masterPassword,
-        },
-      });
-      const data = await response.json();
-      setCredentials(data);
-    };
     fetchCredentials();
     if (!masterPassword) setCredentials([]);
   }, [masterPassword]);
+
+  const handleDeleteService = async (id: string) => {
+    console.log(id);
+    const response = await fetch(`/api/credentials/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: masterPassword,
+      },
+    });
+    const status = response.status;
+    if (status === 200) {
+      const newCredentials = credentials.filter(
+        (credential) => credential._id !== id
+      );
+      setCredentials(newCredentials);
+
+      show();
+    }
+  };
+
+  const handleEditService = async (id: string) => {
+    console.log(id);
+    // This does not work since the credentials get fetched before the service got updated
+    await fetchCredentials();
+  };
 
   return (
     <div className={styles.container}>
       <h1>Dashboard</h1>
       <p>This is my password vault</p>
-      <input
+      <Input
         type="password"
         placeholder="Masterpassword"
         value={masterPassword}
-        onChange={(event) => setMasterPassword(event.target.value)}
+        onChange={setMasterPassword}
       />
-      {credentials.length !== 0 &&
-        credentials.map((credential) => {
-          return (
-            <div key={credential._id}>
-              <p>Service: {credential.service}</p>
-              <p>Password: {credential.password}</p>
-            </div>
-          );
-        })}
-      <button onClick={show}>Show notification</button>
-      <RenderNotification type="primary">
-        This is my amazing notification
-      </RenderNotification>
-      {/* Example for the modal, so to open it just call show from the useModal hook
-      <div onClick={show}>
-        <p>Reddit</p>
-        <p>max@mustermann.de</p>
+      <div className={styles.servicesContainer}>
+        {credentials.length !== 0 &&
+          credentials.map((credential) => {
+            return (
+              <Card key={credential._id}>
+                <ServiceCardContent
+                  service={credential.service}
+                  username={credential.username}
+                  password={credential.password}
+                  masterPassword={masterPassword}
+                  onEdit={() => handleEditService(credential._id)}
+                  onDelete={() => handleDeleteService(credential._id)}
+                  id={credential._id}
+                />
+              </Card>
+            );
+          })}
       </div>
-      <RenderModal>
-        <p>Hello this is your amazing modal</p>
-      </RenderModal> */}
+      <RenderNotification type="success">
+        Service successfully deleted
+      </RenderNotification>
+      <FloatingActionButton />
     </div>
   );
 };

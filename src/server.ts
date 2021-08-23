@@ -52,15 +52,15 @@ app.post('/api/credentials', async (request, response) => {
   response.status(200).send(request.body);
 });
 
-app.put('/api/credentials/:service', async (request, response) => {
+app.put('/api/credentials/:serviceId', async (request, response) => {
   const masterPassword = response.locals.masterPassword;
-  const urlParameter = request.params.service;
+  const urlParameter = request.params.serviceId;
   await updateCredential(urlParameter, request.body, masterPassword);
   response.status(200).send(request.body);
 });
 
-app.delete('/api/credentials/:service', async (request, response) => {
-  const urlParameter = request.params.service;
+app.delete('/api/credentials/:serviceId', async (request, response) => {
+  const urlParameter = request.params.serviceId;
   deleteCredential(urlParameter);
   response.status(200).send();
 });

@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import styles from './Modal.module.css';
 
 type Props = {
   children: React.ReactChild;
   closeModal: () => void;
+  title: string;
 };
 
-const Modal = React.memo(({ children, closeModal }: Props) => {
+const Modal = React.memo(({ children, closeModal, title }: Props) => {
   const domEl = document.querySelector('#modal-root');
 
   if (!domEl) return null;
@@ -17,7 +17,10 @@ const Modal = React.memo(({ children, closeModal }: Props) => {
   // use this component inside our React tree
   return ReactDOM.createPortal(
     <div className={styles.container}>
-      <button onClick={closeModal}>Close</button>
+      <div className={styles.titleContainer}>
+        <h3>{title}</h3>
+        <button onClick={closeModal}>X</button>
+      </div>
       {children}
     </div>,
     domEl
