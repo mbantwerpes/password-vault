@@ -12,16 +12,17 @@ const Dashboard = (): JSX.Element => {
   const [masterPassword, setMasterPassword] = useState<string>('');
   const { show, RenderNotification } = useNotification();
 
+  const fetchCredentials = async () => {
+    const response = await fetch('/api/credentials', {
+      headers: {
+        Authorization: masterPassword,
+      },
+    });
+    const data = await response.json();
+    setCredentials(data);
+  };
+
   useEffect(() => {
-    const fetchCredentials = async () => {
-      const response = await fetch('/api/credentials', {
-        headers: {
-          Authorization: masterPassword,
-        },
-      });
-      const data = await response.json();
-      setCredentials(data);
-    };
     fetchCredentials();
     if (!masterPassword) setCredentials([]);
   }, [masterPassword]);
@@ -47,6 +48,8 @@ const Dashboard = (): JSX.Element => {
 
   const handleEditService = async (id: string) => {
     console.log(id);
+    // This does not work since the credentials get fetched before the service got updated
+    fetchCredentials();
   };
 
   return (
@@ -69,6 +72,7 @@ const Dashboard = (): JSX.Element => {
                   username={credential.username}
                   password={credential.password}
                   masterPassword={masterPassword}
+                  onEdit={() => handleEditService(credential._id)}
                   onDelete={() => handleDeleteService(credential._id)}
                   id={credential._id}
                 />

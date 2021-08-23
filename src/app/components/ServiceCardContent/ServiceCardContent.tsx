@@ -10,6 +10,7 @@ type ServiceCardContentProps = {
   username: string;
   password: string;
   masterPassword: string;
+  onEdit: () => void;
   onDelete: () => void;
   id: string;
 };
@@ -19,6 +20,7 @@ const ServiceCardContent = ({
   username,
   password,
   masterPassword,
+  onEdit,
   onDelete,
   id,
 }: ServiceCardContentProps): JSX.Element => {
@@ -67,6 +69,7 @@ const ServiceCardContent = ({
       </RenderDeleteModal>
       <RenderEditModal title="Edit">
         <EditServiceModal
+          onEdit={onEdit}
           onClose={hideEditModal}
           service={service}
           username={username}

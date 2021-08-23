@@ -3,6 +3,7 @@ import Button from '../Button/Button';
 import Input from '../Input/Input';
 
 type EditServiceModalProps = {
+  onEdit: () => void;
   onClose: () => void;
   service: string;
   username: string;
@@ -12,6 +13,7 @@ type EditServiceModalProps = {
 };
 
 const EditServiceModal = ({
+  onEdit,
   onClose,
   service,
   username,
@@ -25,6 +27,9 @@ const EditServiceModal = ({
 
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    // Close Modal after form submit
+    onClose();
 
     const postData = {
       service: serviceValue,
@@ -64,7 +69,7 @@ const EditServiceModal = ({
           value={passwordValue}
           onChange={setPasswordValue}
         />
-        <Button type="submit" styleType="primary" size="md">
+        <Button type="submit" styleType="primary" size="md" onClick={onEdit}>
           Save
         </Button>
         <Button type="button" styleType="error" size="md" onClick={onClose}>
