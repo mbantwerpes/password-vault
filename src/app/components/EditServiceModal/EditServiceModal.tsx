@@ -45,6 +45,8 @@ const EditServiceModal = ({
       },
       body: JSON.stringify(postData),
     });
+    // Call onEdit here, because we have to wait until the credential is updated before rerendering the list
+    onEdit();
     console.log(await response.json());
   };
 
@@ -69,7 +71,7 @@ const EditServiceModal = ({
           value={passwordValue}
           onChange={setPasswordValue}
         />
-        <Button type="submit" styleType="primary" size="md" onClick={onEdit}>
+        <Button type="submit" styleType="primary" size="md">
           Save
         </Button>
         <Button type="button" styleType="error" size="md" onClick={onClose}>

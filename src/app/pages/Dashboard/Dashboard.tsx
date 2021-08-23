@@ -49,7 +49,7 @@ const Dashboard = (): JSX.Element => {
   const handleEditService = async (id: string) => {
     console.log(id);
     // This does not work since the credentials get fetched before the service got updated
-    fetchCredentials();
+    await fetchCredentials();
   };
 
   return (
