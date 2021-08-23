@@ -39,25 +39,25 @@ export async function addCredential(
   return result.insertedId;
 }
 
-export async function deleteCredential(id: string): Promise<void> {
-  console.log(id);
+export async function deleteCredential(serviceId: string): Promise<void> {
   const credentialCollection = getCredentialCollection();
   await credentialCollection.deleteOne({
-    _id: new ObjectId(id),
+    _id: new ObjectId(serviceId),
   });
 }
 
 export async function updateCredential(
-  service: string,
+  serviceId: string,
   credential: Credential,
   key: string
 ): Promise<void> {
+  console.log(serviceId);
   const credentialCollection = getCredentialCollection();
 
   const encryptedCredential = encryptCredential(credential, key);
 
   await credentialCollection.updateOne(
-    { service },
+    { _id: new ObjectId(serviceId) },
     { $set: encryptedCredential }
   );
 }

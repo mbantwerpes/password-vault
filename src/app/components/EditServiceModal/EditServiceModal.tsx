@@ -4,17 +4,27 @@ import Input from '../Input/Input';
 
 type EditServiceModalProps = {
   onClose: () => void;
+  service: string;
+  username: string;
+  password: string;
+  masterPassword: string;
+  id: string;
 };
 
-const EditServiceModal = ({ onClose }: EditServiceModalProps): JSX.Element => {
-  const [serviceValue, setServiceValue] = useState('');
-  const [usernameValue, setUsernameValue] = useState('');
-  const [passwordValue, setPasswordValue] = useState('');
-  const [masterPasswordValue, setMasterPasswordValue] = useState('');
+const EditServiceModal = ({
+  onClose,
+  service,
+  username,
+  password,
+  masterPassword,
+  id,
+}: EditServiceModalProps): JSX.Element => {
+  const [serviceValue, setServiceValue] = useState<string>(service);
+  const [usernameValue, setUsernameValue] = useState<string>(username);
+  const [passwordValue, setPasswordValue] = useState<string>(password);
 
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('juhu');
 
     const postData = {
       service: serviceValue,
@@ -22,10 +32,10 @@ const EditServiceModal = ({ onClose }: EditServiceModalProps): JSX.Element => {
       password: passwordValue,
     };
 
-    const response = await fetch('/api/credentials', {
-      method: 'POST',
+    const response = await fetch(`/api/credentials/${id}`, {
+      method: 'PUT',
       headers: {
-        Authorization: masterPasswordValue,
+        Authorization: masterPassword,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(postData),
@@ -49,16 +59,10 @@ const EditServiceModal = ({ onClose }: EditServiceModalProps): JSX.Element => {
           onChange={setUsernameValue}
         />
         <Input
-          type="password"
+          type="text"
           placeholder="Password"
           value={passwordValue}
           onChange={setPasswordValue}
-        />
-        <Input
-          type="password"
-          placeholder="MasterPassword"
-          value={masterPasswordValue}
-          onChange={setMasterPasswordValue}
         />
         <Button type="submit" styleType="primary" size="md">
           Save

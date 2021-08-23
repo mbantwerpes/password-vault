@@ -45,6 +45,10 @@ const Dashboard = (): JSX.Element => {
     }
   };
 
+  const handleEditService = async (id: string) => {
+    console.log(id);
+  };
+
   return (
     <div className={styles.container}>
       <h1>Dashboard</h1>
@@ -64,7 +68,9 @@ const Dashboard = (): JSX.Element => {
                   service={credential.service}
                   username={credential.username}
                   password={credential.password}
+                  masterPassword={masterPassword}
                   onDelete={() => handleDeleteService(credential._id)}
+                  id={credential._id}
                 />
               </Card>
             );
