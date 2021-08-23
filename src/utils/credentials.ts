@@ -30,7 +30,7 @@ export async function getCredential(
 export async function addCredential(
   credential: Credential,
   key: string
-): Promise<ObjectId> {
+): Promise<string> {
   const credentialCollection = getCredentialCollection();
 
   const encryptedCredential = encryptCredential(credential, key);
