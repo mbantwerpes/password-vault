@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import styles from './CreateService.module.css';
+import { useHistory } from 'react-router-dom';
 
 const CreateService = (): JSX.Element => {
+  const history = useHistory();
+
   const [serviceValue, setServiceValue] = useState('');
   const [usernameValue, setUsernameValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
@@ -11,7 +14,6 @@ const CreateService = (): JSX.Element => {
 
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('juhu');
 
     const postData = {
       service: serviceValue,
@@ -28,6 +30,9 @@ const CreateService = (): JSX.Element => {
       body: JSON.stringify(postData),
     });
     console.log(await response.json());
+
+    // Redirect to dashboard
+    history.push('/');
   };
 
   return (
