@@ -32,7 +32,7 @@ const CreateService = (): JSX.Element => {
 
   return (
     <div className={styles.container}>
-      <h1>Hier bin ich</h1>
+      <h1>Add credential</h1>
       <form onSubmit={handleFormSubmit}>
         <Input
           type="text"
