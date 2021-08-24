@@ -9,8 +9,6 @@ const Navbar = (): JSX.Element => {
       <img src={logo} alt="" width="30" className={styles.logo} />
       <div className={styles.links}>
         <Link to="/">Dashboard</Link>
-        <Link to="/services">Services</Link>
-        <Link to="/passwords/testservice">Passwords</Link>
       </div>
     </nav>
   );

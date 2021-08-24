@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './App.module.css';
 import Dashboard from './pages/Dashboard/Dashboard';
-import Password from './pages/Password/Password';
 import Navbar from './components/Navbar/Navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import CreateService from './pages/CreateService/CreateService';
@@ -14,12 +13,6 @@ function App(): JSX.Element {
         <Switch>
           <Route path="/add">
             <CreateService />
-          </Route>
-          <Route path="/services">
-            <div>Services</div>
-          </Route>
-          <Route path="/passwords/:service">
-            <Password />
           </Route>
           <Route path="/">
             <Dashboard />
